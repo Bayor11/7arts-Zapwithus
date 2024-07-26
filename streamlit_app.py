@@ -113,9 +113,7 @@ if not selected_currency:
 
 
 
-basetext = f"Enter base value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
-maxtext = f"Enter max-value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
-
+ 
 def runlabels(modinput = 0):
       artwork = check_artworks(st.session_state.calc_value_selection_key)
       if not modinput:
@@ -125,15 +123,15 @@ def runlabels(modinput = 0):
         else:
           basetext = f"Enter base value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
           maxtext = f"Enter max-value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
-        st.write("durect things")
+        st.write("direct modddddd")  
       else:
         #deeper
         st.write(f"deep listener mode : {modinput}")
         st.session_state.max_key = modinput #if is a number
-        st.session_state.max_key.label = modinput
-
-
-
+       # st.session_state.max_key.label = modinput
+        if calc_mode != "Enter manually":
+          st.session_state.calc_value_selection_key = "Enter manually"
+          st.write("tested!")
 
 
 with col2:
@@ -152,6 +150,18 @@ with col2:
 
   calc_mode = st.selectbox("Make a choice", choice_options, on_change=update_input_labels, key="calc_value_selection_key")
 
+
+defaultbasetext = f"Enter base value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
+defaultmaxtext = f"Enter max-value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
+nameofpiece = check_artworks(st.session_state.calc_value_selection_key)
+if calc_mode != "Enter manually" and nameofpiece:
+  basetext = f"{nameofpiece}'s base value ({currency_symbol})"if selected_currency else"Select your currency"
+  maxtext = f"{nameofpiece}'s max-value ({currency_symbol})"if selected_currency else"Select your currency"
+else:  
+  basetext = defaultbasetext
+  maxtext = defaultmaxtext
+
+
 def maxcallback():
   currentvalue = st.session_state.max_key
   runlabels(currentvalue) 
@@ -159,8 +169,6 @@ def maxcallback():
 def basecallback():
   currentvalue = st.session_state.base_key
   runlabels(currentvalue) 
-      
-
 
 col3,  col4 = st.columns(2)
 bid_placeholder = f"Enter your bid price ({currency_symbol})"if selected_currency else"Select your currency"
@@ -173,6 +181,7 @@ with col4:
 
 bid = st.number_input(bid_placeholder, min_value=1, format="%d", disabled=not selected_currency) 
 
+st.write("(Amounts beyond base and max-values are allowed and the extent of your enthusiam to these works will account for how fast it appreciates over time.)")
 today = datetime.date.today()
 
 st.markdown("---")
