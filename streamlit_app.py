@@ -184,13 +184,20 @@ col3, col4 = st.columns(2)
 with col4:
   maxvalue = st.number_input(maxtext, min_value=1, format="%d", on_change=maxcallback, key="max_key", disabled=not selected_currency)
 
+#show or hide comment
+if check_artworks(st.session_state.calc_value_selection_key):
+  st.success("These valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth to do this. Now it's your turn to value the cost of that which can not be piced, time. Perhaps you can help us out by buying one or better yet, value the priceless time you've spent on this too.")
+else:
+  st.error("You are in manual mode. Are you testing this? If anything comes up you can reach out to us on visiting https://www.zapwithus.com")
+
+
 bid = st.number_input(bid_placeholder, min_value=1, format="%d", disabled=not selected_currency) 
 
-st.write("(Amounts beyond base and max-values are allowed and the extent of your enthusiam to these works will account for how fast it appreciates over time.)")
+st.write("(Amounts beyond base and max-values are allowed in bids and the extent to which you extend 'your generousity' to these valuables has been programmed to have massive impact on their individual worth over time.)")
 today = datetime.date.today()
 
 st.markdown("---")
-st.write("Modify or leave this on today's date.")
+st.write("Modify or leave this part on today's date.")
 col5, col6, col7 = st.columns(3)
 with col5:  
   year_input = st.number_input("Year", value=today.year, min_value=2024, format="%d")
@@ -286,8 +293,12 @@ st.write("Beauty is in the eye of the beholder and only those who understand wou
 st.write("Should you choose to collect these works of art, you should understand that neither myself, nor any organization I'm (or would be) affiliated with or anybody for that matter is under any obligation of 'buying back,' fulfilling, enforcing (or anything of these sorts) the presumed or generated values. I know you know this already of course.")
 st.write("Collectors can choose to do whatever they like at any point in time with the 'parts' they hold but the 'fair value' of these artworks would always be based on the output of whatever this formular/program yields at any point in time.")
 st.write("Every details concerning the formula is opensourced and it has purposely been worked into one of the artworks against 'oblivion.'")
-st. write("To make and keep this 'sane,' it wouldn't be advisable for anyone at any point in time to part away with any of these works at prices lesser than the base value that was set for them starting out.")
-st. write("Should it be (or not be: in all situations) that someone got it for an amount below the base value, the greater of most recent highest purchase amount or base value shall be the 'inherrent' bid price to be used with the code in generating actual values and projections.")
+st.write("To make and keep this 'sane,' it wouldn't be advisable for anyone at any point in time to part away with any of these works at prices lesser than the base value that was set for them starting out.")
+st.write("Should it be (or not be: in all situations) that someone got it for an amount below the base value, the greater of most recent highest purchase amount or base value shall be the 'inherrent' bid price to be used with the code in generating actual values and projections.")
 st.write("Yes, we're good now.")
 st.write("⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇")
 st.write("Visit https://www.zapwithus.com/7ap to learn more")
+
+st.markdown("---")
+st.write("Eagles fly alone till they find like minds. I've already met a handful; some already masters at their arts, others on the path of becoming. I look forward to meeting you.")
+st.write("At present time, this was created by me, myself and I. Bayo.")
