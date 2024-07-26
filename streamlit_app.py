@@ -90,7 +90,15 @@ artworks = {
   "6: six" : "six",
   "7: Seven" : "Seven"
 }
-
+artworkprices = {
+  "Alif": {"base": 111, "max": 122},
+  "Buy One": {"base": 211, "max": 222},
+  "No Change": {"base": 311, "max": 322},
+  "Ejo": {"base": 411, "max": 422},
+  "five": {"base": 511, "max": 522},
+  "six": {"base": 611, "max": 622},
+  "Seven": {"base": 711, "max": 722},
+}
 
 
 
@@ -100,8 +108,9 @@ st.title("Brief:")
 st.write("7AP stands for Seven Artworks Project. This is intended to be pronunced as 'Zap' after some great works that are underway.  Much has been discussed about this elsewhere which I guess you know about already but if you don't, do check it out here: https://www.zapwithus.com/7ap")
 
 st.markdown("---")
-st.title("7APs Value Calculator")
-st.write("For any of the arts on sale, have a go at what's possible under different parameters. Start by having their respective base and maximum values set below then add and vary your inputs as much as you'd like.")
+st.title("7APs Value Projector")
+st.write("For all of the artworks on sale, you can now have a go at what's possible under different scenarios.")
+st.write("Start by having their respective base and maximum values set below then add and vary your inputs as much as you'd like.")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -113,25 +122,20 @@ if not selected_currency:
 
 
 
- 
+def quickcheck():
+  artwork = check_artworks(st.session_state.calc_value_selection_key)
+  if artwork:
+          data = artworkprices[artwork]
+          st.session_state.base_key = data["base"]
+          st.session_state.max_key = data["max"]
+
 def runlabels(modinput = 0):
       artwork = check_artworks(st.session_state.calc_value_selection_key)
       if not modinput:
-        if artwork:
-          basetext = f"{artwork}'s base value ({currency_symbol})"if selected_currency else"Select your currency"
-          maxtext = f"{artwork}'s max-value ({currency_symbol})"if selected_currency else"Select your currency"
-        else:
-          basetext = f"Enter base value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
-          maxtext = f"Enter max-value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
-        st.write("direct modddddd")  
+        quickcheck()
       else:
-        #deeper
-        st.write(f"deep listener mode : {modinput}")
-        st.session_state.max_key = modinput #if is a number
-       # st.session_state.max_key.label = modinput
         if calc_mode != "Enter manually":
           st.session_state.calc_value_selection_key = "Enter manually"
-          st.write("tested!")
 
 
 with col2:
@@ -145,7 +149,7 @@ with col2:
                    "7: Seven")
   def update_input_labels():
         show_loading_message()
-        runlabels("")
+        runlabels()
 
 
   calc_mode = st.selectbox("Make a choice", choice_options, on_change=update_input_labels, key="calc_value_selection_key")
@@ -155,6 +159,7 @@ defaultbasetext = f"Enter base value of artwork ({currency_symbol})"if selected_
 defaultmaxtext = f"Enter max-value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
 nameofpiece = check_artworks(st.session_state.calc_value_selection_key)
 if calc_mode != "Enter manually" and nameofpiece:
+  quickcheck()
   basetext = f"{nameofpiece}'s base value ({currency_symbol})"if selected_currency else"Select your currency"
   maxtext = f"{nameofpiece}'s max-value ({currency_symbol})"if selected_currency else"Select your currency"
 else:  
@@ -230,7 +235,7 @@ with col9:
     else:
       start_date = datetime.date(year_input, month_input, day_input)
       next_20_days_data = next_20_days_value(base_value, maxvalue, bid, start_date, currency_symbol)
-      st.subheader("Next 20 Days Value")
+      st.subheader("⬇⬇⬇⬇⬇⬇⬇⬇")
       st.table(pd.DataFrame(next_20_days_data, columns=["Date", "Value"]))
 
 def next_10_years_value(base_value, maxvalue, bid, start_year, currency_symbol):
@@ -255,14 +260,14 @@ with col10:
     else:
       start_year = year_input
       next_10_years_data, errors = next_10_years_value(base_value, maxvalue, bid, start_year, currency_symbol)
-      st.subheader("Next 10 Years Value")
+      st.subheader("⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇")
       if errors:
         for error in errors:
           st.error(error)
       else:
         st.table(pd.DataFrame(next_10_years_data, columns=["Date", "Value"]))
-st.write("Got no clue what any of these means? You can brush up by going through my chat with Gemini to get a hang of it here: https://g.co/gemini/share/9280b3feda5e")
-st.write("Don't know the base and max values for any of the artworks? Find them here for the time being: https://www.zapwithus.com/7ap")
+st.write("Got no clue about what any of these means? You can brush up by going through my chat with Gemini to get a hang of it here: https://g.co/gemini/share/9280b3feda5e")
+st.write("Don't know the current base and max values for any of the artworks? Find them here for the time being: https://www.zapwithus.com/7ap")
 
 
 st. markdown("---")
@@ -276,11 +281,13 @@ st.markdown("---")
 
 st.title("Disclaimer⚠️")
 st.write("Or, should I say terms?")
-st.write("The thing about rules is that there are no rules except those we set for ourselves or choose to follow. I'm not going to be poetic at al here.")
+st.write("The thing about rules is that there are no rules except those we set for ourselves or choose to follow. I'm not going to drool here at all.")
 st.write("Beauty is in the eye of the beholder and only those who understand would appreciate this for what it is and nothing more.")
 st.write("Should you choose to collect these works of art, you should understand that neither myself, nor any organization I'm (or would be) affiliated with or anybody for that matter is under any obligation of 'buying back,' fulfilling, enforcing (or anything of these sorts) the presumed or generated values. I know you know this already of course.")
 st.write("Collectors can choose to do whatever they like at any point in time with the 'parts' they hold but the 'fair value' of these artworks would always be based on the output of whatever this formular/program yields at any point in time.")
 st.write("Every details concerning the formula is opensourced and it has purposely been worked into one of the artworks against 'oblivion.'")
 st. write("To make and keep this 'sane,' it wouldn't be advisable for anyone at any point in time to part away with any of these works at prices lesser than the base value that was set for them starting out.")
-st. write("Should it be (or not be: in all situation) that someone got it for an amount below the base value, the greater of most recent highest purchase amount or base value shall be the 'inherrent' bid price to be used with the code in generating actual values and projections.")
+st. write("Should it be (or not be: in all situations) that someone got it for an amount below the base value, the greater of most recent highest purchase amount or base value shall be the 'inherrent' bid price to be used with the code in generating actual values and projections.")
 st.write("Yes, we're good now.")
+st.write("⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇")
+st.write("Visit https://www.zapwithus.com/7ap to learn more")
