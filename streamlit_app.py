@@ -154,14 +154,27 @@ with col2:
 
   calc_mode = st.selectbox("Make a choice", choice_options, on_change=update_input_labels, key="calc_value_selection_key")
 
+
+
+
+
+
+
+
 #Show description
-yy = st.session_state.calc_value_selection_key
-if check_artworks(yy):
-  aboutmessage = f"{yy}'s Description:\n"
-  if yy == "Alif":
+xx = check_artworks(st.session_state.calc_value_selection_key)
+if xx:
+  aboutmessage = ""
+  if xx == "Alif":
     aboutmessage += "1"
   
-  st.success(aboutmessage)
+  st.success(f"{xx}'s Description:\? {aboutmessage}")
+
+
+
+
+
+
 
 
 defaultbasetext = f"Enter base value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
@@ -195,7 +208,7 @@ with col4:
 
 #show or hide comment
 if check_artworks(st.session_state.calc_value_selection_key):
-  st.success("These valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth to do this. Now it's your turn to value the cost of that which can not be piced, time. Perhaps you can help us out by buying one or better yet, value the priceless time you've spent on this too.")
+  st.success("These valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth in bringing this to you. Now it's your turn to value the cost of that which can not be priced; time.\n Perhaps you can help us out by valuing the priceless time you've spent on this too or better yet, collecting one of these gems.")
 else:
   st.error("You are in manual mode. Are you testing this? If anything funky comes up you can reach out to us and leave a note when you visit https://www.zapwithus.com")
 
