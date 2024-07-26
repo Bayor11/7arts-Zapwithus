@@ -154,6 +154,15 @@ with col2:
 
   calc_mode = st.selectbox("Make a choice", choice_options, on_change=update_input_labels, key="calc_value_selection_key")
 
+#Show description
+yy = st.session_state.calc_value_selection_key
+if check_artworks(yy):
+  aboutmessage = f"{yy}'s Description:\n"
+  if yy == "Alif":
+    aboutmessage += "1"
+  
+  st.success(aboutmessage)
+
 
 defaultbasetext = f"Enter base value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
 defaultmaxtext = f"Enter max-value of artwork ({currency_symbol})"if selected_currency else"Select your currency"
@@ -188,7 +197,7 @@ with col4:
 if check_artworks(st.session_state.calc_value_selection_key):
   st.success("These valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth to do this. Now it's your turn to value the cost of that which can not be piced, time. Perhaps you can help us out by buying one or better yet, value the priceless time you've spent on this too.")
 else:
-  st.error("You are in manual mode. Are you testing this? If anything comes up you can reach out to us on visiting https://www.zapwithus.com")
+  st.error("You are in manual mode. Are you testing this? If anything funky comes up you can reach out to us and leave a note when you visit https://www.zapwithus.com")
 
 
 bid = st.number_input(bid_placeholder, min_value=1, format="%d", disabled=not selected_currency) 
@@ -280,7 +289,7 @@ st.write("Don't know the current base and max values for any of the artworks? Fi
 st. markdown("---")
 
 st.title("Looking to get one?")
-st.write("This way please: https://www.zapwithus.com/7ap/buy-one ")
+st.write("This way please: https://www.zapwithus.com/7ap/get-one ")
 
 st.markdown("---")
 st.markdown("---")
