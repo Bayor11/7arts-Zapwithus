@@ -159,7 +159,7 @@ with col2:
   currency_options = ("...", "USD", "NGN")
   selected_currency = st.selectbox("Select your currency", currency_options, on_change=runeffect, key="currency_selection_key" )
   if selected_currency == "...":
-    st.error("ℹPlease select your preferred currency above.")
+    st.error("⚠️  \n Please select your preferred currency above.")
     currency_symbol = "[You have not made a choice of what currency to use]"
   else:
     currency_symbol = "$" if selected_currency == "USD" else "#"
@@ -190,7 +190,7 @@ xx = check_artworks(st.session_state.calc_value_selection_key)
 if xx:
   if xx == "Polar":
     position = "1st"
-    aboutmessage = "Polar is the first piece of this puzzle.  \n It is an 'empty' card if not for one stroke of 'something.'  \n It is meant to symbolize simplicity, focus and the undying virtue of taking 'calculated chances.'  \n Alternative names explored for this include Alif [the first letter of the Arabic alphabet,] Path [you get it...] and One [the first number for single entities.]"
+    aboutmessage = "Polar is the first piece of this puzzle.  \n It is an 'empty' card if not for one stroke of 'something.'  \n It is meant to symbolize simplicity, focus and the undying virtue of taking 'calculated chances.'  \n Alternative names explored for this include Alif [the first letter of the Arabic alphabet,] One [the first number for single entities] and Path."
   elif xx == "Something":
     position = "2nd"
     aboutmessage = ""
@@ -212,7 +212,12 @@ if xx:
   else:
     position = "None"
     aboutmessage = "Huh huh... You shouldn't be seeing this."
-  
+
+
+  if not xx == "Polar":
+    aboutmessage = "Please stay tuned, this will be updated later today."
+
+
   text = f"<span style='text-decoration: underline;'>{xx}'s Description:</span>"
   st.markdown(text, unsafe_allow_html=True)
   st.write(f"Position in collection: {position}")
@@ -257,8 +262,10 @@ with col4:
 #show or hide comment
 if check_artworks(st.session_state.calc_value_selection_key):
   if selected_currency == "NGN":
-    st.write("(Rated at #1500 for every $1)")
-  st.warning("ℹ️  \nThese valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth in bringing this to you. Now it's your turn to value the cost of that which can not be priced; time.  \n You can help by valuing the precious time you've just spent on this too, collecting one of these gems or better yet, joining the ongoing crowdfunding campaign we have going by doing your part on https://www.zapwithus.com")
+    st.write("(Converted at NGN1500 for every USD)")
+#  st.warning("ℹ️  \nThese valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth in bringing this to you. Now it's your turn to value the cost of that which can not be priced; time.  \n You can help by valuing the precious time you've just spent on this too, collecting one of these gems or better yet, joining the ongoing crowdfunding campaign we are running by doing your part on https://www.zapwithus.com")
+  st.warning("These are placeholder values, actual values will be updated later todaythe ")
+
 else:
   st.error("ℹ️  \nYou are now in manual mode. All basic principles still apply.  \n If you've got any concern or inquiry, do leave a note at outreach@zapwithus.com")
 
@@ -364,7 +371,7 @@ with col10:
 
 st.markdown("---")
 
-st.write("Got no clue about what any of these means? You can brush up by going through my chat with Gemini to get a hang of it here: https://g.co/gemini/share/9280b3feda5e")
+st.write("Got no clue about what any of these means? You can brush up by reading my medium piece: https://medium.com/@teetaofeeq/zapwithuss-7aps-inception-and-beyond-1121eba65345")
 st.write("Don't know the current base and max values for any of the artworks? Find them here for the time being: https://www.zapwithus.com/7ap")
 
 
@@ -381,11 +388,11 @@ st.title("Disclaimer⚠️")
 st.write("Or, should I say terms?")
 st.write("The thing about rules is that there are no rules except those we set for ourselves or choose to follow. I'm not going to drool here at all.")
 st.write("Beauty is in the eye of the beholder and only those who understand would appreciate this for what it is and nothing more.")
-st.write("Should you choose to collect these works of art, you should understand that neither myself, nor any organization I'm (or would be) affiliated with or anybody for that matter is under any obligation of 'buying back,' fulfilling, enforcing [or anything of these sorts] the presumed or generated values. I know you know this already of course.")
+st.write("Should you choose to collect these works of art, you should understand that neither myself, nor any organization I'm [or would be] affiliated with or anybody for that matter is under any obligation of 'buying back,' fulfilling, enforcing [or anything of these sorts] the presumed or generated values. I know you know this already of course.")
 st.write("Collectors can choose to do whatever they like at any point in time with the 'parts' they hold but the 'fair value' of these artworks would always be based on the output of whatever 'the script' yields at any point in time when 'used correctly.'")
 st.write("Every details concerning the formula is opensourced and it has purposely been worked into one of the artworks against 'oblivion.'")
 st.write("To make and keep this 'sane,' it wouldn't be advisable for anyone at any point in time to part away with any of these works at prices lesser than the greater of thier base values or how much they were last collected for.")
-st.write("Should it be (or not be: in all situations) that someone got one for an amount below the base value, the greater of most recent highest purchase amount or base value shall be the 'inherrent' bid price to be used with the script in generating actual values and projections.")
+st.write("Should it be [or not be: in all situations] that someone got one for an amount below the base value, the greater of most recent highest purchase amount or base value shall be the 'inherrent' bid price to be used with the script in generating actual values and projections.")
 st.write("Yes, we're good now.")
 st.write("⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇")
 st.write("Visit https://www.zapwithus.com/7ap to learn more.")
