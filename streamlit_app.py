@@ -6,6 +6,25 @@ import time
 
 
 
+st.logo(
+    "images/base_image.png",
+    link="https://www.zapwithus.com",
+    icon_image="images/base_image.png",
+)
+
+
+
+
+
+
+
+def runeffect():
+    with st.spinner('Setting things up... '):
+      for i in range(5):
+        st.empty()
+        time.sleep(0.5)
+
+
 
 def show_loading_message():
   with st.spinner('Calculating'):
@@ -16,9 +35,7 @@ def show_loading_message():
 def calculate_value_factor(maxvalue, bv, bid):
   if bid < bv:
     raise ValueError("Bid cannot be less than base value")
-
   midvalue = (maxvalue + bv) / 2
-
   if bid <= maxvalue:
     value_factor = 1 + (bid - bv) / (maxvalue - bv) * 5
     return max(value_factor, 1)
@@ -41,6 +58,8 @@ def calculate_value(base_value, maxvalue, bid, year, month, day):
 
 def validate_input(base_value, maxvalue, bid, year, month, day):
   errors = []
+  if not selected_currency in {"USD", "NGN"}:
+    errors.append("You haven't selected any currency.  \nChoose one above and try again.")
   if not isinstance(base_value, int):
     errors.append("Base Value must be an integer.")
   if not isinstance(maxvalue, int):
@@ -82,22 +101,22 @@ def check_artworks(selected):
   else:
     return 0
 artworks = {
-  "1: Alif" : "Alif",
-  "2: Buy One" : "Buy One",
-  "3: No Change" : "No Change",
-  "4: Ejo" : "Ejo",
-  "5: five" : "five",
-  "6: six" : "six",
-  "7: Seven" : "Seven"
+  "2: Something" : "Something",
+  "1: Polar" : "Polar",
+  "3: Gear" : "Gear",
+  "4: Script" : "Script",
+  "5: Wheel" : "Wheel",
+  "6: Nothing" : "Nothing",
+  "7: Binary" : "Binary"
 }
 artworkprices = {
-  "Alif": {"base": 111, "max": 122},
-  "Buy One": {"base": 211, "max": 222},
-  "No Change": {"base": 311, "max": 322},
-  "Ejo": {"base": 411, "max": 422},
-  "five": {"base": 511, "max": 522},
-  "six": {"base": 611, "max": 622},
-  "Seven": {"base": 711, "max": 722},
+  "Something": {"base": 111, "max": 122},
+  "Polar": {"base": 211, "max": 222},
+  "Gear": {"base": 311, "max": 322},
+  "Script": {"base": 411, "max": 422},
+  "Wheel": {"base": 511, "max": 522},
+  "Nothing": {"base": 611, "max": 622},
+  "Binary": {"base": 711, "max": 722},
 }
 
 
@@ -105,32 +124,59 @@ artworkprices = {
 st.title("Welcome to this other side.")
 st.write("This external page was created for you to be able to check the funky arithmetics out. ")
 st.title("Brief:")
-st.write("7AP stands for Seven Artworks Project. This is intended to be pronunced as 'Zap' after some great works that are underway.  Much has been discussed about this elsewhere which I guess you know about already but if you don't, do check it out here: https://www.zapwithus.com/7ap")
+st.write("7AP stands for Seven Artworks Project. This is intended to be pronunced as 'Zap' after some great works that are underway.  \nMuch has been discussed about this elsewhere which I guess you know about already but if you don't, start checking them out from here: https://www.zapwithus.com/7ap")
 
 st.markdown("---")
 st.title("7APs Value Projector")
 st.write("For all of the artworks on sale, you can now have a go at what's possible under different scenarios.")
 st.write("Start by having their respective base and maximum values set below then add and vary your inputs as much as you'd like.")
 
+
+
+
 col1, col2 = st.columns(2)
+
 with col1:
-  currency_options = ("NGN", "USD")
-  selected_currency = st.selectbox("Select your currency", currency_options)
-  currency_symbol = "$" if selected_currency == "USD" else "#"
-if not selected_currency:
-  st.warning("Please select your preferred currency")
+  choice_options = (
+                   "1: Polar",
+                   "2: Something",
+                   "3: Gear",
+                   "4: Script",
+                   "5: Wheel",
+                   "6: Nothing",
+                   "7: Binary",
+                   "Enter manually"
+                  )
+  def update_input_labels():
+        runeffect()
+        runlabels()
 
 
+  calc_mode = st.selectbox("Make your choice", choice_options, on_change=update_input_labels, key="calc_value_selection_key")
+
+
+with col2:
+  currency_options = ("...", "USD", "NGN")
+  selected_currency = st.selectbox("Select your currency", currency_options, on_change=runeffect, key="currency_selection_key" )
+  if selected_currency == "...":
+    st.error("ℹPlease select your preferred currency above.")
+    currency_symbol = "[You have not made a choice of what currency to use]"
+  else:
+    currency_symbol = "$" if selected_currency == "USD" else "#"
 
 def quickcheck():
   artwork = check_artworks(st.session_state.calc_value_selection_key)
   if artwork:
           data = artworkprices[artwork]
-          st.session_state.base_key = data["base"]
-          st.session_state.max_key = data["max"]
+          if selected_currency == "NGN":
+            factor = 1500
+            st.session_state.base_key = data["base"]*factor
+            st.session_state.max_key = data["max"]*factor
+          else:
+            st.session_state.base_key = data["base"]
+            st.session_state.max_key = data["max"]
 
 def runlabels(modinput = 0):
-      artwork = check_artworks(st.session_state.calc_value_selection_key)
       if not modinput:
         quickcheck()
       else:
@@ -138,37 +184,39 @@ def runlabels(modinput = 0):
           st.session_state.calc_value_selection_key = "Enter manually"
 
 
-with col2:
-  choice_options = ("Enter manually",
-                  "1: Alif",
-                   "2: Buy One",
-                   "3: No Change",
-                   "4: Ejo",
-                   "5: five",
-                   "6: six",
-                   "7: Seven")
-  def update_input_labels():
-        show_loading_message()
-        runlabels()
-
-
-  calc_mode = st.selectbox("Make a choice", choice_options, on_change=update_input_labels, key="calc_value_selection_key")
-
-
-
-
-
-
-
 
 #Show description
 xx = check_artworks(st.session_state.calc_value_selection_key)
 if xx:
-  aboutmessage = ""
-  if xx == "Alif":
-    aboutmessage += "1"
+  if xx == "Polar":
+    position = "1st"
+    aboutmessage = "Polar is the first piece of this puzzle.  \n It is an 'empty' card if not for one stroke of 'something.'  \n It is meant to symbolize simplicity, focus and the undying virtue of taking 'calculated chances.'  \n Alternative names explored for this include Alif [the first letter of the Arabic alphabet,] Path [you get it...] and One [the first number for single entities.]"
+  elif xx == "Something":
+    position = "2nd"
+    aboutmessage = ""
+  elif xx == "Gear":
+    position = "3rd"
+    aboutmessage = ""
+  elif xx == "Script":
+    position = "4th"
+    aboutmessage = ""
+  elif xx == "Wheel":
+    position = "5th"
+    aboutmessage = ""
+  elif xx == "Nothing":
+    position = "6th"
+    aboutmessage = ""
+  elif xx == "Binary":
+    position = "7th"
+    aboutmessage = ""
+  else:
+    position = "None"
+    aboutmessage = "Huh huh... You shouldn't be seeing this."
   
-  st.success(f"{xx}'s Description:\? {aboutmessage}")
+  text = f"<span style='text-decoration: underline;'>{xx}'s Description:</span>"
+  st.markdown(text, unsafe_allow_html=True)
+  st.write(f"Position in collection: {position}")
+  st.success(aboutmessage)
 
 
 
@@ -208,14 +256,19 @@ with col4:
 
 #show or hide comment
 if check_artworks(st.session_state.calc_value_selection_key):
-  st.success("These valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth in bringing this to you. Now it's your turn to value the cost of that which can not be priced; time.\n Perhaps you can help us out by valuing the priceless time you've spent on this too or better yet, collecting one of these gems.")
+  if selected_currency == "NGN":
+    st.write("(Rated at #1500 for every $1)")
+  st.warning("ℹ️  \nThese valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth in bringing this to you. Now it's your turn to value the cost of that which can not be priced; time.  \n You can help by valuing the precious time you've just spent on this too, collecting one of these gems or better yet, joining the ongoing crowdfunding campaign we have going by doing your part on https://www.zapwithus.com")
 else:
-  st.error("You are in manual mode. Are you testing this? If anything funky comes up you can reach out to us and leave a note when you visit https://www.zapwithus.com")
+  st.error("ℹ️  \nYou are now in manual mode. All basic principles still apply.  \n If you've got any concern or inquiry, do leave a note at outreach@zapwithus.com")
 
 
 bid = st.number_input(bid_placeholder, min_value=1, format="%d", disabled=not selected_currency) 
 
-st.write("(Amounts beyond base and max-values are allowed in bids and the extent to which you extend 'your generousity' to these valuables has been programmed to have massive impact on their individual worth over time.)")
+
+if check_artworks(st.session_state.calc_value_selection_key):
+  st.warning("ℹ️  \nAmounts beyond base and max-values are allowed in bids and the extent to which you extend your 'generousity' to these valuables has been programmed to have massive impact on their projected worth over time.")
+
 today = datetime.date.today()
 
 st.markdown("---")
@@ -242,7 +295,20 @@ with col8:
       value = calculate_value(base_value, maxvalue, bid, year_input, month_input, day_input)
       vf = calculate_value_factor(maxvalue, base_value, bid)
       vf = vf*0.0012*365*100
-      st.success(f"Artwork Value: {currency_symbol}{value:.2f} under about {vf:.2f}% annual growth factor.")
+      if today.day == day_input and today.month == month_input and today.year == year_input:
+        sameday = 1
+        suffix = "today"
+      else:
+        sameday = 0
+        suffix = f"on {day_input}-{month_input}-{year_input}"
+      focusedart = check_artworks(st.session_state.calc_value_selection_key)
+      if focusedart:
+        prefix = focusedart
+      else:
+        prefix = "the artwork"
+      prefix = f"{prefix}'s worth is projected to be"
+      phrase = f"{prefix} approximately {currency_symbol}{value:.2f} {suffix} over about {vf:.2f}% annual growth factor."
+      st.success(f"⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇  \n Under the conditions supplied above and 'the correct result of the script' ran, {phrase}")
 
 
 def next_20_days_value(base_value, maxvalue, bid, start_date, currency_symbol):
@@ -295,6 +361,9 @@ with col10:
           st.error(error)
       else:
         st.table(pd.DataFrame(next_10_years_data, columns=["Date", "Value"]))
+
+st.markdown("---")
+
 st.write("Got no clue about what any of these means? You can brush up by going through my chat with Gemini to get a hang of it here: https://g.co/gemini/share/9280b3feda5e")
 st.write("Don't know the current base and max values for any of the artworks? Find them here for the time being: https://www.zapwithus.com/7ap")
 
@@ -312,15 +381,19 @@ st.title("Disclaimer⚠️")
 st.write("Or, should I say terms?")
 st.write("The thing about rules is that there are no rules except those we set for ourselves or choose to follow. I'm not going to drool here at all.")
 st.write("Beauty is in the eye of the beholder and only those who understand would appreciate this for what it is and nothing more.")
-st.write("Should you choose to collect these works of art, you should understand that neither myself, nor any organization I'm (or would be) affiliated with or anybody for that matter is under any obligation of 'buying back,' fulfilling, enforcing (or anything of these sorts) the presumed or generated values. I know you know this already of course.")
-st.write("Collectors can choose to do whatever they like at any point in time with the 'parts' they hold but the 'fair value' of these artworks would always be based on the output of whatever this formular/program yields at any point in time.")
+st.write("Should you choose to collect these works of art, you should understand that neither myself, nor any organization I'm (or would be) affiliated with or anybody for that matter is under any obligation of 'buying back,' fulfilling, enforcing [or anything of these sorts] the presumed or generated values. I know you know this already of course.")
+st.write("Collectors can choose to do whatever they like at any point in time with the 'parts' they hold but the 'fair value' of these artworks would always be based on the output of whatever 'the script' yields at any point in time when 'used correctly.'")
 st.write("Every details concerning the formula is opensourced and it has purposely been worked into one of the artworks against 'oblivion.'")
-st.write("To make and keep this 'sane,' it wouldn't be advisable for anyone at any point in time to part away with any of these works at prices lesser than the base value that was set for them starting out.")
-st.write("Should it be (or not be: in all situations) that someone got it for an amount below the base value, the greater of most recent highest purchase amount or base value shall be the 'inherrent' bid price to be used with the code in generating actual values and projections.")
+st.write("To make and keep this 'sane,' it wouldn't be advisable for anyone at any point in time to part away with any of these works at prices lesser than the greater of thier base values or how much they were last collected for.")
+st.write("Should it be (or not be: in all situations) that someone got one for an amount below the base value, the greater of most recent highest purchase amount or base value shall be the 'inherrent' bid price to be used with the script in generating actual values and projections.")
 st.write("Yes, we're good now.")
 st.write("⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇")
-st.write("Visit https://www.zapwithus.com/7ap to learn more")
+st.write("Visit https://www.zapwithus.com/7ap to learn more.")
 
 st.markdown("---")
-st.write("Eagles fly alone till they find like minds. I've already met a handful; some already masters at their arts, others on the path of becoming. I look forward to meeting you.")
-st.write("At present time, this was created by me, myself and I. Bayo.")
+st.write("Eagles fly alone till they find like minds. I've already met a handful; some already masters at their arts, others on the path of becoming. I look forward to meeting you too.")
+st.markdown("---")
+st.write("Always doing my part, I don't know if you will get some of these works now or not but I understand that having planted the right seeds, this will grow. I expect that growth to happen fast but of course, that is not in my control but I'm going to sell out and sell more. Art is life.  \n All proceeds from this are going into Zapwithus and other humanitarian causes. Thanks.")
+
+text = f"<div style='display: flex; justify-content: center;'>©{today.year} Zapwithus/7AP  \nAll rights reserved.</div>"
+st.markdown(text, unsafe_allow_html=True)
