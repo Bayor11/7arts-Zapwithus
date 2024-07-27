@@ -264,7 +264,7 @@ if check_artworks(st.session_state.calc_value_selection_key):
   if selected_currency == "NGN":
     st.write("(Converted at NGN1500 for every USD)")
 #  st.warning("ℹ️  \nThese valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth in bringing this to you. Now it's your turn to value the cost of that which can not be priced; time.  \n You can help by valuing the precious time you've just spent on this too, collecting one of these gems or better yet, joining the ongoing crowdfunding campaign we are running by doing your part on https://www.zapwithus.com")
-  st.warning("These are placeholder values, actual values will be updated later todaythe ")
+  st.warning("These are placeholder values, actual values will be updated later today. Accept our apologies.")
 
 else:
   st.error("ℹ️  \nYou are now in manual mode. All basic principles still apply.  \n If you've got any concern or inquiry, do leave a note at outreach@zapwithus.com")
