@@ -215,6 +215,8 @@ if xx:
   text = f"<span style='text-decoration: underline;'>{xx}'s Description:</span>"
   st.markdown(text, unsafe_allow_html=True)
   st.write(f"Position in collection: {position}")
+  if xx == "Wheel":
+    st.error("ℹ️  \n This piece can not be collected till all others are taken.")
   st.success(aboutmessage)
 
 
