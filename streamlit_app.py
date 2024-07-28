@@ -212,7 +212,7 @@ if xx:
   else:
     position = "Huh huh..."
     aboutmessage = "You shouldn't be seeing this, something went wrong."
-  text = f"<span style='text-decoration: underline;'>{xx}'s Description:</span>"
+  text = f"<span style='text-decoration: underline;'>{xx}'s description:</span>"
   st.markdown(text, unsafe_allow_html=True)
   st.write(f"Position in collection: {position}")
   if xx == "Wheel":
@@ -258,7 +258,7 @@ with col4:
 #show or hide comment
 if check_artworks(st.session_state.calc_value_selection_key):
   if selected_currency == "NGN":
-    st.write("(Converted at NGN1500 for every USD)")
+    st.write("(Converted at NGN1500 to the USD. Contact us if this is a concern.)")
   st.warning("ℹ️  \nThese valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth in bringing this to you. Now it's your turn to value the cost of that which can not be priced; time.  \n You can help by valuing the precious time you've just spent on this too, collecting one of these gems or better yet, joining the ongoing crowdfunding campaign we are running by doing your part on https://www.zapwithus.com")
 
 else:
@@ -388,6 +388,8 @@ st.write("Collectors can choose to do whatever they like at any point in time wi
 st.write("Every details concerning the formula is opensourced and it has purposely been worked into one of the artworks against 'oblivion.'")
 st.write("To make and keep this 'sane,' it wouldn't be advisable for anyone at any point in time to part away with any of these works at prices lesser than the greater of thier base values or how much they were last collected for.")
 st.write("Should it be [or not be: in all situations] that someone got one for an amount below the base value, the greater of most recent highest purchase amount or base value shall be the 'inherrent' bid price to be used with the script in generating actual values and projections.")
+st.write("When or before all of these are taken, we can set up a designated observatory to track the value of these works and their flow from hands to hands depending on weather as a collector, you'd like your details disclosed or maintain anonymity with minimal information displayed.  \n As always, I don't doubt that all these will be collected including the SAPA (serious absence of purchasing ability) collection that is most likely to follow.")
+st.write("All proceeds from this are going into Zapwithus and other humanitarian causes. Thanks.")
 st.write("Yes, we're good now.")
 st.write("⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇⬇")
 st.write("Visit https://www.zapwithus.com/7ap to learn more.")
@@ -395,9 +397,9 @@ st.write("Visit https://www.zapwithus.com/7ap to learn more.")
 st.markdown("---")
 st.write("Eagles fly alone till they find like minds. I've already met a handful; some already masters at their arts, others on the path of becoming. I look forward to meeting you too.")
 st.markdown("---")
-st.write("Always doing my part, I don't know if you will get some of these works now or not but I understand that having planted the right seeds, this will grow. I expect that growth to happen fast but of course, that is not in my control but I'm going to sell out and sell more. Art is life.  \n All proceeds from this are going into Zapwithus and other humanitarian causes. Thanks.")
+st.write("Always doing my part, I don't know if you will get some of these works now or not but I understand that having planted the right seeds, this will grow. I expect that growth to happen fast but of course, that is not in my control but I'm going to sell out and sell more. Art is life.")
 
 st.markdown("---")
-st.warning("Access the sourcecodes through here: https://github.com/bayor11/7arts-zapwithus")
-text = f"<div style='display: flex; justify-content: center;'>©{today.year} Zapwithus  \nAll rights reserved.</div>"
+st.warning("Access the source codes through here: https://github.com/bayor11/7arts-zapwithus")
+text = f"<div style='display: flex; justify-content: center;'>©{today.year} Zapwithus.  \nAll rights reserved.</div>"
 st.markdown(text, unsafe_allow_html=True)
