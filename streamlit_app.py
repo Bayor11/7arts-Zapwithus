@@ -193,31 +193,25 @@ if xx:
     aboutmessage = "Polar is the first piece of this puzzle.  \n It is an 'empty' card if not for one stroke of 'something.'  \n It is meant to symbolize simplicity, focus and the undying virtue of taking 'calculated chances.'  \n Alternative names explored for this include Alif [the first letter of the Arabic alphabet,] One [the first number for single entities] and Path."
   elif xx == "Something":
     position = "2nd"
-    aboutmessage = ""
+    aboutmessage = "Life is a game of cards, we play the ones we are dealt.  \n Though we can't see what other players are holding, we know they will surely add strength to our hands.  \n Being the second 'part' of this puzzle, this piece is centered on the notion that 'something' that's empty is 'nothing' but 'nothing' is 'something' that's empty too.  \n Because everything whole around us are made up of parts, Something is anything and everything and this piece symbolizes potentials.  \n For the very reason that something that's empty is nothing, this piece and the second to the last are valued equal starting out. Alternative names explored for this includes; Eva [meaning life,] Canvas and Chaos."
   elif xx == "Gear":
     position = "3rd"
-    aboutmessage = ""
+    aboutmessage = "Gear is the agent of turning point in this grand narrative.  \n As the third piece in this puzzle, it represents the dynamic shift from potential to action.  \n It is the cog that drives the machinery of creation; switching it constantly helps transforms the effect of actions into results.  \n Like a key unlocking new possibilities, Gear is essential to the evolution of the collection. It is the embodiment of progress, the momentum that propels narratives forward.  \n Alternative names explored for this includes; Motion, Struggle and Catalyst."
   elif xx == "Script":
     position = "4th"
-    aboutmessage = ""
+    aboutmessage = "Script is the blueprint of the collection, the underlying code that gives form to the abstract.  \n As the fourth and central piece, it represents the mechanics of creation, the framework upon which the other pieces took their form.  \n It is the invisible hand that shapes the visible world.  \n Alternative names explored for this includes; DNA, Program and Skin."
   elif xx == "Wheel":
     position = "5th"
-    aboutmessage = ""
+    aboutmessage = "Wheel is the architect of connectivity between systems.  \n As the fifth piece, it represents the intricate web of relationships between everything at play in the making and delivery of the collection.  \n It is the collection's nervous system and can not be collected till the others are all taken.  \n Alternative names explored for this includes; Zed [after the last English alphabet,] Wake [trails of moving things] and Processor [like CPU.]"
   elif xx == "Nothing":
     position = "6th"
-    aboutmessage = ""
+    aboutmessage = "Nothing is the void, the antithesis of Something.  \n It is the absence that precedes creation, the emptiness that holds the potential for all existence.  \n As the sixth and second to the last piece in this collection, it represents the cyclical nature of being, a return to the primordial state. Yet, it is not a barren wasteland but a cosmic womb, nurturing the seeds of new beginnings.  \n Nothing is both the end and the start, the alpha and the omega, a paradox of infinite possibility.  \n Alternative names explored for this includes; Phoenix, Ashes and Retrograde."
   elif xx == "Binary":
     position = "7th"
-    aboutmessage = ""
+    aboutmessage = "Binary is the culmination of the collection, representing the digital age and the convergence of art and technology.  \n As the seventh and final piece, it symbolizes the complexity arising from simplicity, the infinite possibilities encoded within binary systems.  \n It is a testament to human innovation and our ability to create new realities.  \n Alternative names explored for this includes; Genesis, Perspective and Mirrors."
   else:
-    position = "None"
-    aboutmessage = "Huh huh... You shouldn't be seeing this."
-
-
-  if not xx == "Polar":
-    aboutmessage = "Please stay tuned, this will be updated later today."
-
-
+    position = "Huh huh..."
+    aboutmessage = "You shouldn't be seeing this, something went wrong."
   text = f"<span style='text-decoration: underline;'>{xx}'s Description:</span>"
   st.markdown(text, unsafe_allow_html=True)
   st.write(f"Position in collection: {position}")
