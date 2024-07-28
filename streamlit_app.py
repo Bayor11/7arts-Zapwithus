@@ -101,8 +101,8 @@ def check_artworks(selected):
   else:
     return 0
 artworks = {
-  "2: Something" : "Something",
   "1: Polar" : "Polar",
+  "2: Something" : "Something",
   "3: Gear" : "Gear",
   "4: Script" : "Script",
   "5: Wheel" : "Wheel",
@@ -110,8 +110,8 @@ artworks = {
   "7: Binary" : "Binary"
 }
 artworkprices = {
-  "Something": {"base": 400000, "max": 1500000},
-  "Polar": {"base": 1000000, "max": 5000000},
+  "Polar": {"base": 400000, "max": 1500000},
+  "Something": {"base": 1000000, "max": 5000000},
   "Gear": {"base": 400000, "max": 1500000},
   "Script": {"base": 100000, "max": 800000},
   "Wheel": {"base": 400000, "max": 1500000},
