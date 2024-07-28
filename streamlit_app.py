@@ -402,6 +402,6 @@ st.markdown("---")
 st.write("Always doing my part, I don't know if you will get some of these works now or not but I understand that having planted the right seeds, this will grow. I expect that growth to happen fast but of course, that is not in my control but I'm going to sell out and sell more. Art is life.  \n All proceeds from this are going into Zapwithus and other humanitarian causes. Thanks.")
 
 st.markdown("---")
-st.warning("Access the sourcecodes through here: github.com/bayor11/7arts-zapwithus")
+st.warning("Access the sourcecodes through here: https://github.com/bayor11/7arts-zapwithus")
 text = f"<div style='display: flex; justify-content: center;'>©{today.year} Zapwithus  \nAll rights reserved.</div>"
 st.markdown(text, unsafe_allow_html=True)

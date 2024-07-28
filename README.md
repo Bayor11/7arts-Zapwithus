@@ -74,4 +74,5 @@ This model provides a flexible framework for valuing artwork based on various pa
 
 Brush up on what's going on by visiting:
 https://www.zapwithus.com/7AP
+
 🔥 🔥 🔥 
