@@ -110,13 +110,13 @@ artworks = {
   "7: Binary" : "Binary"
 }
 artworkprices = {
-  "Something": {"base": 111, "max": 122},
-  "Polar": {"base": 211, "max": 222},
-  "Gear": {"base": 311, "max": 322},
-  "Script": {"base": 411, "max": 422},
-  "Wheel": {"base": 511, "max": 522},
-  "Nothing": {"base": 611, "max": 622},
-  "Binary": {"base": 711, "max": 722},
+  "Something": {"base": 400000, "max": 1500000},
+  "Polar": {"base": 1000000, "max": 5000000},
+  "Gear": {"base": 400000, "max": 1500000},
+  "Script": {"base": 100000, "max": 800000},
+  "Wheel": {"base": 400000, "max": 1500000},
+  "Nothing": {"base": 1000000, "max": 5000000},
+  "Binary": {"base": 400000, "max": 1500000},
 }
 
 
@@ -263,8 +263,7 @@ with col4:
 if check_artworks(st.session_state.calc_value_selection_key):
   if selected_currency == "NGN":
     st.write("(Converted at NGN1500 for every USD)")
-#  st.warning("ℹ️  \nThese valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth in bringing this to you. Now it's your turn to value the cost of that which can not be priced; time.  \n You can help by valuing the precious time you've just spent on this too, collecting one of these gems or better yet, joining the ongoing crowdfunding campaign we are running by doing your part on https://www.zapwithus.com")
-  st.warning("These are placeholder values, actual values will be updated later today. Accept our apologies.")
+  st.warning("ℹ️  \nThese valuations were independently arrived at by me as a highly discounted sum of the value of resources I had to put forth in bringing this to you. Now it's your turn to value the cost of that which can not be priced; time.  \n You can help by valuing the precious time you've just spent on this too, collecting one of these gems or better yet, joining the ongoing crowdfunding campaign we are running by doing your part on https://www.zapwithus.com")
 
 else:
   st.error("ℹ️  \nYou are now in manual mode. All basic principles still apply.  \n If you've got any concern or inquiry, do leave a note at outreach@zapwithus.com")
@@ -402,5 +401,7 @@ st.write("Eagles fly alone till they find like minds. I've already met a handful
 st.markdown("---")
 st.write("Always doing my part, I don't know if you will get some of these works now or not but I understand that having planted the right seeds, this will grow. I expect that growth to happen fast but of course, that is not in my control but I'm going to sell out and sell more. Art is life.  \n All proceeds from this are going into Zapwithus and other humanitarian causes. Thanks.")
 
-text = f"<div style='display: flex; justify-content: center;'>©{today.year} Zapwithus/7AP  \nAll rights reserved.</div>"
+st.markdown("---")
+st.warning("Access the sourcecodes through here: github.com/bayor11/7arts-zapwithus")
+text = f"<div style='display: flex; justify-content: center;'>©{today.year} Zapwithus  \nAll rights reserved.</div>"
 st.markdown(text, unsafe_allow_html=True)
